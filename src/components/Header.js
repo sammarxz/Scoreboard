@@ -3,13 +3,16 @@ import Stats from './Stats';
 import Stopwatch from './Stopwatch';
 
 
-const Header = (props) => (
-  <header>
-  	<Stats players={ props.players } />
-    <h1>{ props.title }</h1>
-    <Stopwatch />
-  </header>
-)
+const Header = ({ players, title }) => {
+
+	return (
+		<header>
+	  	<Stats players={ players } />
+	    <h1>{ title }</h1>
+	    <Stopwatch />
+	  </header>
+	)
+}
 
 
 export default Header;
