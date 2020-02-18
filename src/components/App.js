@@ -1,96 +1,16 @@
 import React from 'react';
 import Header from './Header';
-import Player from './Player';
+import PlayerList from './PlayerList';
 import AddPlayerForm from './AddPlayerForm';
 
 
-class App extends React.Component {
-  state = {
-    players : [
-      {
-        id: 1,
-        name: "Guil",
-        score: 0
-      },
-      {
-        id: 2,
-        name: "Treasure",
-        score: 0
-      },
-      {
-        id: 3,
-        name: "Ashley",
-        score: 0
-      },
-      {
-        id: 4,
-        name: "James",
-        score: 0
-      }
-    ]
-  }
-
-  // player id counter
-  prevPlayerId = 4;
-
-  handleScoreChange = (index, delta) => {
-    this.setState(prevState => ({
-      score: prevState.players[index].score += delta
-    }))
-  }
-
-  handleAddPlayer = (name) => {
-    let newPlayer = {
-      name,
-      score: 0,
-      id: this.prevPlayerId += 1
-    }
-
-    this.setState(prevState => ({
-      players: prevState.players.concat(newPlayer)
-    }))
-  }
-
-  handleRemovePlayer = (id) => {
-    this.setState( prevState => ({
-      players: prevState.players.filter( player => player.id !== id )
-    }))
-  }
-
-  getHighScore = () => {
-    const scores = this.state.players.map(p => p.score);
-    const highScore = Math.max(...scores);
-
-    if (highScore) {
-      return highScore
-    }
-
-    return null;
-  }
-
-  render() {
-    const highScore = this.getHighScore();
-
-    return (
-      <div className="scoreboard">
-        <Header title="Scoreboard" players={ this.state.players } />
-        { this.state.players.map((player, index) => (
-          <Player 
-            key={ player.id } 
-            id={ player.id }
-            index={ index }
-            name={ player.name }
-            score={ player.score }
-            changeScore={ this.handleScoreChange }
-            removePlayer={ this.handleRemovePlayer }
-            isHighScore={highScore === player.score}
-          />
-        )) }
-        <AddPlayerForm addPlayer={ this.handleAddPlayer }/>
-      </div>
-    )
-  }
-}
+const App = () => (
+  <div className="scoreboard">
+    <Header />
+    <PlayerList />
+    <AddPlayerForm />
+  </div>
+)
 
 
 export default App;
